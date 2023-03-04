@@ -17,6 +17,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     Page<Pessoa> findAll(Pageable pageable);
 
     @Query("SELECT min(p.posicao) FROM Pessoa p")
-    int menorPosicao();
+    Integer menorPosicao();
 
 }
