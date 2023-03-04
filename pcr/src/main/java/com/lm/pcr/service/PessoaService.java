@@ -35,7 +35,6 @@ public class PessoaService {
 
     public Pessoa create(Pessoa obj) {
         Integer menorPosicao = repository.menorPosicao();
-        System.out.println("teste  "+menorPosicao);
         if(menorPosicao == null){
             obj.setPosicao(999);
         }else{
