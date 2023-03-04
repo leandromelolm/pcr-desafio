@@ -34,8 +34,8 @@ public class PessoaService {
     }
 
     public Pessoa create(Pessoa obj) {
-        int quant = repository.quantidadePessoasRegistradas();
-        obj.setPosicao(1000 - quant);
+        int menorPosicao = repository.menorPosicao();
+        obj.setPosicao(menorPosicao - 1);
 
         return repository.save(modelMapper.map(obj, Pessoa.class));
     }

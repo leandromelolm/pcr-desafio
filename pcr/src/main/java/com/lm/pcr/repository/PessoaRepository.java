@@ -16,7 +16,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     @Query("SELECT p FROM Pessoa p")
     Page<Pessoa> findAll(Pageable pageable);
 
-    @Query("SELECT COUNT(*) FROM Pessoa")
-    int quantidadePessoasRegistradas();
+    @Query("SELECT min(p.posicao) FROM Pessoa p")
+    int menorPosicao();
 
 }
