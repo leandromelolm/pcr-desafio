@@ -22,6 +22,7 @@ public class PessoaServiceTest {
 
     public static final Integer IDADE = 20;
     public static final Integer POSICAO999 = 999;
+    public static final Integer POSICAO2 = 2;
 
     @InjectMocks
     private PessoaService personService;
@@ -54,6 +55,21 @@ public class PessoaServiceTest {
         assertEquals(NOME, response.getNome());
         assertEquals(IDADE, response.getIdade());
         assertEquals(POSICAO999, response.getPosicao());
+    }
+
+    @Test
+    void criarPessoaComSucessoNoBDJaPopulado(){
+        when(personRepository.save(any())).thenReturn(person);
+        when(personRepository.menorPosicao()).thenReturn(3);
+
+        Pessoa response = personService.create(person);
+
+        assertNotNull(response);
+        assertEquals(Pessoa.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NOME, response.getNome());
+        assertEquals(IDADE, response.getIdade());
+        assertEquals(POSICAO2, response.getPosicao());
     }
 
 
