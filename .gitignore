@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Arquivo de persistencia do banco de dados gerado ao executar o docker-compose ###
+.db**
