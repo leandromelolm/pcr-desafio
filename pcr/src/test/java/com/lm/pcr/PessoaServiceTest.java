@@ -1,6 +1,6 @@
 package com.lm.pcr;
 
-import com.lm.pcr.models.Pessoa;
+import com.lm.pcr.entity.Pessoa;
 import com.lm.pcr.repository.PessoaRepository;
 import com.lm.pcr.service.PessoaService;
 import org.junit.jupiter.api.BeforeEach;

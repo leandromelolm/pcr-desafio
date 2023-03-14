@@ -1,7 +1,7 @@
 package com.lm.pcr.service;
 
 import com.lm.pcr.dto.PessoaDTO;
-import com.lm.pcr.models.Pessoa;
+import com.lm.pcr.entity.Pessoa;
 import com.lm.pcr.repository.PessoaRepository;
 import com.lm.pcr.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;

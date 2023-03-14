@@ -7,7 +7,7 @@
 ## Docker Compose Spring Boot and MySQL
 ### Run the System
 
-Executar o arquivo docker-compose.yml:
+Executar o arquivo docker-compose.yml (porta local: localhost:8081):
 ```bash
 docker compose up
 ```
@@ -92,8 +92,6 @@ localhost:8080/pessoas/{id}
 ``
 
 ___
-
-
 ### Desafio:
 Você trabalha em um banco que tem constantes problemas para organizar as filas de atendimento dos clientes.
 Depois de uma reunião com a gerência, foi decidido que os clientes receberão uma senha numérica em seu celular via SMS ao chegar na agência e a ordem da fila será determinada pelo número recebido via SMS, em vez da ordem de chegada.

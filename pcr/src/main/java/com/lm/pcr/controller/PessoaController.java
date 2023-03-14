@@ -1,7 +1,7 @@
 package com.lm.pcr.controller;
 
 import com.lm.pcr.dto.PessoaDTO;
-import com.lm.pcr.models.Pessoa;
+import com.lm.pcr.entity.Pessoa;
 import com.lm.pcr.service.PessoaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
