@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +22,8 @@ public class PessoaService {
 
     @Autowired
     ModelMapper modelMapper;
+
+    int tamanhoMaxFila = 5;
 
     public Page<PessoaDTO> findAll(Integer page, Integer size, String orderBy, String direction) {
         Pageable pageable =  PageRequest.of(page, size, Sort.Direction.valueOf(direction),orderBy);
@@ -35,12 +38,34 @@ public class PessoaService {
 
     public Pessoa create(Pessoa obj) {
         Integer menorPosicao = repository.menorPosicao();
+        System.out.println(menorPosicao);
         if(menorPosicao == null){
-            obj.setPosicao(999);
-        }else{
-            obj.setPosicao(menorPosicao - 1);
+            obj.setPosicao(tamanhoMaxFila);
+            return repository.save(modelMapper.map(obj, Pessoa.class));
         }
-        return repository.save(modelMapper.map(obj, Pessoa.class));
+        if(menorPosicao != null && menorPosicao > 1){
+            obj.setPosicao(menorPosicao - 1);
+            return repository.save(modelMapper.map(obj, Pessoa.class));
+        }
+        if(repository.count() < tamanhoMaxFila){
+            reorganizarOrdemDaFila();
+            menorPosicao = repository.menorPosicao();
+            obj.setPosicao(menorPosicao - 1);
+            return repository.save(modelMapper.map(obj, Pessoa.class));
+        }
+        throw new IllegalStateException("Lista cheia! Remova para poder adicionar mais. Tamanho máximo da fila: "+ tamanhoMaxFila);
+    }
+
+    private void reorganizarOrdemDaFila() {
+        List<Pessoa> pessoas = repository.findAll();
+        pessoas.sort((p2, p1) -> Integer.compare(p1.getPosicao(), p2.getPosicao()));
+        int i = tamanhoMaxFila;
+        for(Pessoa p : pessoas){
+            System.out.println("pessoa "+p.getId());
+            p.setPosicao(i);
+            i = i - 1;
+            repository.save(modelMapper.map(p, Pessoa.class));
+        }
     }
 
     public Object udpate(PessoaDTO objDto) {
