@@ -9,9 +9,19 @@ Executar container com docker compose
 docker compose up -d
 ```
 
+Docker logs
+```bash
+docker container logs -f ID_OU_NOME_CONTAINER
+```
+
 Acessar container
 ```bash
 docker exec -it CONTAINER_NAME /bin/bash
+```
+
+Verificar status do mysql
+```bash
+service mysql status
 ```
 
 Abrir o mysql no terminal
@@ -25,11 +35,11 @@ Comandos mysql
 ``` 
 
 ```sh
-> SHOW GLOBAL VARIABLES LIKE 'PORT';
+> SHOW DATABASES;
 ```
 
 ```sh
-> show databases;
+> USE NOME_DO_BD;
 ```
 
 Sair do mysql
@@ -94,10 +104,12 @@ diretorio local padrão dos volumes
 /var/lib/docker/volumes/
 ```
 
-___
-### Instalar Docker
 
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
+
+___
+### Docker Instalação
+
+> https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
 
 Verificar se o docker está instalado
 ```bash
@@ -142,11 +154,6 @@ Teste docker run
 docker run hello-world
 ```
 
-Docker logs
-```bash
-docker container logs -f id_ou_nome_do_container
-```
-
 Ver logs docker
 ```sh
 docker logs -f 0
@@ -163,7 +170,7 @@ docker volume prune
 ```
 
 ___
-### Docker install
+#### Docker Instalar via documentação
 
 Link com informações para instalar o docker
 > https://docs.docker.com/engine/install/ubuntu/#install-from-a-package
@@ -246,7 +253,7 @@ $ newgrp docker
 ```
 
 ___
-### Docker compose install
+#### Docker compose instalação
 
 > https://docs.docker.com/compose/install/linux/#install-the-plugin-manually
 
