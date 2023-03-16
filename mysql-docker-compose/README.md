@@ -104,6 +104,19 @@ diretorio local padrão dos volumes
 /var/lib/docker/volumes/
 ```
 
+### Docker comandos básicos
+
+| Comandos                                      | Descrição                                 |
+|-----------------------------------------------|-------------------------------------------|
+| `docker events`                                 | Inspecionar o que tá acontencendo (usar aba separada) |
+| `docker stats`                                  | Estatisticas da maquina com uso de containers em execução (usar aba separada)|
+| `docker top CONTAINER_ID`                       | Conferir o processo que está sendo executado no momento  |
+| `docker run -p 81:81 -d -m 512m --cpu-quota 50000 IMAGE_NAME`  |Executar container com parametros de memória e cpu de uso limitados |
+| `docker container stop CONTAINER_ID_OU_NAME`   | Parar container                            |
+| `docker system df`                             | Informações do sistema do docker           |
+| `docker container inspect CONTAINER_ID`        | Inspecionar o container                    |
+|                                                |                                            |
+
 
 
 ___
