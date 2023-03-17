@@ -34,3 +34,5 @@ build/
 
 ### Arquivo de persistencia do banco de dados gerado ao executar o docker-compose ###
 .db**
+
+**/application-dev.yml
