@@ -4,7 +4,7 @@ Cria o banco de dados `pcr-db-dev` com usuario admin e senha admin;
 
 ### Docker comandos principais
 
-Executar container com docker compose
+Inicializar container com docker compose
 ```bash
 docker compose up -d
 ```
@@ -57,18 +57,14 @@ Parar container e remove conexão e imagem docker
 docker-compose down --rmi local
 ```
 
-Listar
+Listar Container
 ```bash
 docker container ls -a
-docker image ls -a
-docker volume ls
 ```
 
-Remover
+Remover container
 ```bash
 docker container rm ID_CONTAINER
-docker rmi -f ID_IMAGE
-docker volume rm ID_VOLUME
 ```
 
 Parar todos os contêineres em execução
@@ -108,13 +104,20 @@ diretorio local padrão dos volumes
 
 | Comandos                                      | Descrição                                 |
 |-----------------------------------------------|-------------------------------------------|
-| `docker events`                                 | Inspecionar o que tá acontencendo (usar aba separada) |
-| `docker stats`                                  | Estatisticas da maquina com uso de containers em execução (usar aba separada)|
-| `docker top CONTAINER_ID`                       | Conferir o processo que está sendo executado no momento  |
-| `docker run -p 81:81 -d -m 512m --cpu-quota 50000 IMAGE_NAME`  |Executar container com parametros de memória e cpu de uso limitados |
-| `docker container stop CONTAINER_ID_OU_NAME`   | Parar container                            |
-| `docker system df`                             | Informações do sistema do docker           |
-| `docker container inspect CONTAINER_ID`        | Inspecionar o container                    |
+| docker container ls -a                        | Listar container                          |
+| docker ps -a -q                               | Listar container (-q para exibir apenas id) |
+| docker image ls -a                            | Listar Imagens                            |
+| docker volume ls                              | Listar volumes                            |
+| docker container rm ID_CONTAINER              | Remover container                         |
+| docker rmi -f ID_IMAGE                        | Remover imagem                            |
+| docker volume rm ID_VOLUME                    | Remover volume                            |
+| docker events                                 | Inspecionar o que tá acontencendo (usar aba separada) |
+| docker stats                                  | Estatisticas da maquina com uso de containers em execução (usar aba separada)|
+| docker top CONTAINER_ID                       | Conferir o processo que está sendo executado no momento  |
+| docker run -p 81:81 -d -m 512m --cpu-quota 50000 IMAGE_NAME  |Executar container com parametros de memória e cpu de uso limitados |
+| docker container stop CONTAINER_ID_OU_NAME   | Parar container                            |
+| docker system df                             | Informações do sistema do docker           |
+| docker container inspect CONTAINER_ID        | Inspecionar o container                    |
 |                                                |                                            |
 
 
