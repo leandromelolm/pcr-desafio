@@ -17,13 +17,6 @@ import static org.mockito.Mockito.*;
 
 public class PessoaServiceTest {
 
-    public static final long ID = 1L;
-    public static final String NOME = "João Test";
-
-    public static final Integer IDADE = 20;
-    public static final Integer POSICAO999 = 999;
-    public static final Integer POSICAO2 = 2;
-
     @InjectMocks
     private PessoaService personService;
 
@@ -34,6 +27,14 @@ public class PessoaServiceTest {
     private ModelMapper modelMapper;
 
     private Pessoa person;
+
+
+    public static final long ID = 1L;
+    public static final String NOME = "João Test";
+
+    public static final Integer IDADE = 20;
+    public static final Integer POSICAO1000 = 1000;
+    public static final Integer POSICAO2 = 2;
 
 
     @BeforeEach
@@ -54,7 +55,7 @@ public class PessoaServiceTest {
         assertEquals(ID, response.getId());
         assertEquals(NOME, response.getNome());
         assertEquals(IDADE, response.getIdade());
-        assertEquals(POSICAO999, response.getPosicao());
+        assertEquals(POSICAO1000, response.getPosicao());
     }
 
     @Test
@@ -70,6 +71,21 @@ public class PessoaServiceTest {
         assertEquals(NOME, response.getNome());
         assertEquals(IDADE, response.getIdade());
         assertEquals(POSICAO2, response.getPosicao());
+    }
+
+    @Test
+    void criarPessoaComSucessoListaCheia(){
+        when(personRepository.save(any())).thenReturn(person);
+        when(personRepository.menorPosicao()).thenReturn(1);
+
+        Pessoa response = personService.create(person);
+
+        assertNotNull(response);
+        assertEquals(Pessoa.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NOME, response.getNome());
+        assertEquals(IDADE, response.getIdade());
+        assertEquals(0, response.getPosicao());
     }
 
 

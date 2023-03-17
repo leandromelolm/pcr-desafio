@@ -23,7 +23,7 @@ public class PessoaService {
     @Autowired
     ModelMapper modelMapper;
 
-    int tamanhoMaxFila = 5;
+    int tamanhoMaxFila = 1000;
 
     public Page<PessoaDTO> findAll(Integer page, Integer size, String orderBy, String direction) {
         Pageable pageable =  PageRequest.of(page, size, Sort.Direction.valueOf(direction),orderBy);
@@ -38,7 +38,6 @@ public class PessoaService {
 
     public Pessoa create(Pessoa obj) {
         Integer menorPosicao = repository.menorPosicao();
-        System.out.println(menorPosicao);
         if(menorPosicao == null){
             obj.setPosicao(tamanhoMaxFila);
             return repository.save(modelMapper.map(obj, Pessoa.class));
