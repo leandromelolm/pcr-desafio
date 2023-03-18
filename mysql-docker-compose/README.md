@@ -57,6 +57,11 @@ Parar container e remove conexão e imagem docker
 docker-compose down --rmi local
 ```
 
+Remover imagens e volumes
+```bash
+docker compose down --rmi all -v
+```
+
 Listar Container
 ```bash
 docker container ls -a
@@ -321,3 +326,8 @@ sudo chmod 666 /var/run/docker.sock
 ```
 > https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
 
+
+Gerar jar com maven (dentro da raiz do projeto):
+```bash
+mvn clean package -DskipTests 
+```

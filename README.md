@@ -7,7 +7,12 @@
 ## Docker Compose Spring Boot and MySQL
 ### Run the System
 
-Executar o arquivo docker-compose.yml (porta local: localhost:8081):
+Gerar jar com maven (dentro da raiz do projeto):
+```bash
+mvn clean package -DskipTests 
+```
+
+Executar o arquivo docker-compose.yml (verificar portas no arquivo .env):
 ```bash
 docker compose up
 ```
@@ -19,19 +24,24 @@ Os serviços podem ser executados em segundo plano com o comando:
 docker compose up -d
 ```
 
-### Stop the System
-Parando todos os contêineres em execução com o comando:
+### Stop the System (Parar com docker compose)
+Parar contêineres executados com docker compose:
 ```bash
 docker compose down
 ```
 
-Para parar e remover todos os contêineres, redes e todas as imagens usadas por qualquer serviço no arquivo <em>docker-compose.yml</em>, use o comando:
+Parar e remover todos os contêineres, redes e todas as imagens usadas por qualquer serviço no arquivo <em>docker-compose.yml</em>, use o comando:
 ```bash
 docker compose down --rmi all
 ```
 
-### Versões Docker
+Remover imagens e volumes:
+```bash
+docker compose down --rmi all -v
+```
 
+
+### Versões Docker
 
 Docker
 
