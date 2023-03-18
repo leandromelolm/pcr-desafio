@@ -1,0 +1,13 @@
+env:
+  telesign:
+    CustomerId: ""
+    apiKey: ""
+    phoneNumber: ""
+    phoneTypeVoip: ""
+    messageType: ""
+    restEndpoint: "https://rest-ww.telesign.com"
+    #--- //"https://rest-ww.telesign.com"; "https://rest-api.telesign.com"; "https://rest-ww.telesign.com";
+
+    #--- Preencher as variáveis vazias "" com as geradas no sistema da telesign.
+    #--- Renomear arquivo atual para application-test.yml
+    #--- Em application.properties deve está: spring.profiles.active=${APP_PROFILE:test}

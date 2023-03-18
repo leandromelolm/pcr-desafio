@@ -4,6 +4,9 @@ import com.lm.pcr.dto.PessoaDTO;
 import com.lm.pcr.entity.Pessoa;
 import com.lm.pcr.repository.PessoaRepository;
 import com.lm.pcr.service.exceptions.ObjectNotFoundException;
+import com.telesign.MessagingClient;
+import com.telesign.RestClient;
+import jakarta.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,9 @@ public class PessoaService {
     @Autowired
     ModelMapper modelMapper;
 
+    @Autowired
+    private PhoneMessage phoneMessage;
+
     int tamanhoMaxFila = 1000;
 
     public Page<PessoaDTO> findAll(Integer page, Integer size, String orderBy, String direction) {
@@ -36,21 +42,24 @@ public class PessoaService {
         return pessoaOptional.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
-    public Pessoa create(Pessoa obj) {
+    public Pessoa create(PessoaDTO dto) {
         Integer menorPosicao = repository.menorPosicao();
         if(menorPosicao == null){
-            obj.setPosicao(tamanhoMaxFila);
-            return repository.save(modelMapper.map(obj, Pessoa.class));
+            dto.setPosicao(tamanhoMaxFila);
+            sendPhoneMessage(dto);
+            return repository.save(modelMapper.map(dto, Pessoa.class));
         }
         if(menorPosicao != null && menorPosicao > 1){
-            obj.setPosicao(menorPosicao - 1);
-            return repository.save(modelMapper.map(obj, Pessoa.class));
+            dto.setPosicao(menorPosicao - 1);
+            sendPhoneMessage(dto);
+            return repository.save(modelMapper.map(dto, Pessoa.class));
         }
         if(repository.count() < tamanhoMaxFila){
             reorganizarOrdemDaFila();
             menorPosicao = repository.menorPosicao();
-            obj.setPosicao(menorPosicao - 1);
-            return repository.save(modelMapper.map(obj, Pessoa.class));
+            dto.setPosicao(menorPosicao - 1);
+            sendPhoneMessage(dto);
+            return repository.save(modelMapper.map(dto, Pessoa.class));
         }
         throw new IllegalStateException("Lista cheia! Remova para poder adicionar mais. Tamanho máximo da fila: "+ tamanhoMaxFila);
     }
@@ -74,5 +83,38 @@ public class PessoaService {
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    private void sendPhoneMessage(PessoaDTO objDto){
+
+        objDto.setPosicao(objDto.getPosicao());
+
+        PhoneMessage userPhoneMessage = new PhoneMessage(
+                objDto.getPhoneNumber(),
+                objDto.getNome() + ", Posição na fila: " + objDto.getPosicao());
+
+        System.out.println("customerID "+phoneMessage.getCustomerId());
+
+        try {
+            MessagingClient messagingClient = new MessagingClient(
+                    phoneMessage.getCustomerId(),
+                    phoneMessage.getApiKey(),
+                    phoneMessage.getRestEndpoint()
+            );
+            RestClient.TelesignResponse telesignResponse = messagingClient.message(
+                    userPhoneMessage.getPhoneNumber(),
+                    userPhoneMessage.getMessage(),
+                    phoneMessage.getMessageType(),
+                    null
+            );
+            System.out.println(telesignResponse.json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostConstruct
+    public void testEnvironmentVariable() {
+        System.out.println("Test EnvironmentVariable restEndpoint: ".concat(phoneMessage.getRestEndpoint()));
     }
 }

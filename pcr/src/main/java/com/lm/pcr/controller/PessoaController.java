@@ -41,10 +41,10 @@ public class PessoaController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> create(@RequestBody Pessoa obj){
+    public ResponseEntity<PessoaDTO> create(@RequestBody PessoaDTO objDto){ //<Void>
         URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}").buildAndExpand(service.create(obj).getId()).toUri();
-        return ResponseEntity.created(uri).build();
+                .fromCurrentRequest().path("/{id}").buildAndExpand(service.create(objDto).getId()).toUri();
+        return ResponseEntity.ok().body(objDto);  // ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/{id}")

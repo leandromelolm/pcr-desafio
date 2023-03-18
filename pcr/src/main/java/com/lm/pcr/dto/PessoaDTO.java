@@ -1,5 +1,6 @@
 package com.lm.pcr.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lm.pcr.entity.Pessoa;
 
 public class PessoaDTO {
@@ -8,6 +9,8 @@ public class PessoaDTO {
     private String nome;
     private int idade;
     private int posicao;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String phoneNumber;
 
     public PessoaDTO (Pessoa p){
         this.id = p.getId();
@@ -58,6 +61,13 @@ public class PessoaDTO {
 	public void setPosicao(int posicao) {
 		this.posicao = posicao;
 	}
-    
-    
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 }
