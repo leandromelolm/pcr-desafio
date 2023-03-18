@@ -1,5 +1,6 @@
 package com.lm.pcr;
 
+import com.lm.pcr.dto.PessoaDTO;
 import com.lm.pcr.entity.Pessoa;
 import com.lm.pcr.repository.PessoaRepository;
 import com.lm.pcr.service.PessoaService;
@@ -28,6 +29,8 @@ public class PessoaServiceTest {
 
     private Pessoa person;
 
+    private PessoaDTO personDto;
+
 
     public static final long ID = 1L;
     public static final String NOME = "João Test";
@@ -48,7 +51,7 @@ public class PessoaServiceTest {
         when(personRepository.save(any())).thenReturn(person);
         when(personRepository.menorPosicao()).thenReturn(null);
 
-        Pessoa response = personService.create(person);
+        Pessoa response = personService.create(personDto);
 
         assertNotNull(response);
         assertEquals(Pessoa.class, response.getClass());
@@ -63,7 +66,7 @@ public class PessoaServiceTest {
         when(personRepository.save(any())).thenReturn(person);
         when(personRepository.menorPosicao()).thenReturn(3);
 
-        Pessoa response = personService.create(person);
+        Pessoa response = personService.create(personDto);
 
         assertNotNull(response);
         assertEquals(Pessoa.class, response.getClass());
@@ -78,7 +81,7 @@ public class PessoaServiceTest {
         when(personRepository.save(any())).thenReturn(person);
         when(personRepository.menorPosicao()).thenReturn(1);
 
-        Pessoa response = personService.create(person);
+        Pessoa response = personService.create(personDto);
 
         assertNotNull(response);
         assertEquals(Pessoa.class, response.getClass());
@@ -91,5 +94,6 @@ public class PessoaServiceTest {
 
     private void startPerson(){
         person = new Pessoa(1L,"João Test",20, 0);
+        personDto = new PessoaDTO(1L,"João Test",20, 0);
     }
 }
