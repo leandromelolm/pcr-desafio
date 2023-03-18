@@ -37,3 +37,4 @@ build/
 
 **/application-dev.yml
 **/application-test.yml
+**/application.yml

@@ -1,0 +1,12 @@
+env:
+  telesign:
+    CustomerId: ""
+    apiKey: ""
+    phoneNumber: ""
+    phoneTypeVoip: ""
+    messageType: ""
+    restEndpoint: ""
+
+    #--- Preencher as variáveis vazias "" com as geradas no sistema do telesign.
+    #--- Renomear arquivo atual para application.yml
+    #--- Em application.properties deve está: spring.profiles.active=${APP_PROFILE:dev}
