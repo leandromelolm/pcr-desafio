@@ -75,7 +75,8 @@ localhost:8080/pessoas
 ```json
 {       
     "nome": "pessoa test1",
-    "idade": 20 
+    "idade": 20,
+    "phoneNumber": "5581000000000" 
 }
 ```
 
