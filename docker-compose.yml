@@ -16,7 +16,7 @@ services:
     container_name: "spring-pcr-desafio-app"
     depends_on:
       - mysqldb
-    build: ./pcr
+    build: ./backend
     restart: on-failure
     env_file: ./.env
     ports:
